@@ -1,0 +1,162 @@
+;r00 for communicating with input and output ports
+;r01 holds the value h3f for comparison(branching)
+;r02 holds the ascii of character
+;r03 holds mask for column
+;r04 counter for column
+;r05 holdss zero for comparison(branching)
+
+ground_all_rows: andi r00,r00,h00
+out r00
+wait_for_release:nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+andi r01,r01,h00
+addi r01,r01,h3f
+bne r00,r01,wait_for_release
+wait_for_key:nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+be r00,r01,wait_for_key
+call wait_15ms
+in r00
+andi r00,r00,h3f
+be r00,r01,wait_for_key
+andi r00,r00,h00
+addi r00,r00,hf;  0,1111
+out r00
+nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+bne r00,r01,row_0
+andi r00,r00,h00
+addi r00,r00,h17; 1,0111
+out r00
+nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+bne r00,r01,row_1
+andi r00,r00,h00
+addi r00,r00,h1b;  1,1011
+out r00
+nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+bne r00,r01,row_2
+andi r00,r00,h00
+addi r00,r00,h1d;  1,1101
+out r00
+nop
+nop
+nop
+in r00
+andi r00,r01,h3f
+bne r00,r01,row_3
+andi r00,r00,h00
+out r00
+nop
+nop
+nop
+in r00 
+andi r00,r00,h3f
+bne r00,r01,row_4
+
+row_0:andi r02,r02,h00
+jump cols
+
+row_1: andi r02,r02,h00
+addi r02,r02,h06
+jump cols
+
+row_2: andi r02,r02,h00
+addi r02,r02,h0c
+jump cols
+
+row_3: andi r02,r02,h00
+addi r02,r02,h12
+jump cols
+
+row_4: andi r02,r02,h00
+addi r02,r02,h18
+
+cols:andi r03,r03,h00
+andi r04,r04,h00
+andi r05,r05,h00
+addi r03,r03,h01
+up: push r00
+and r00,r00,r03
+be r00,r05,outt
+pop r00
+addi r04,r04,h01
+shl r03,r03
+jump up
+outt: pop r00
+add r02,r02,r04
+addi r02,r02,h41
+shl r02,r02
+shl r02,r02
+shl r02,r02
+shl r02,r02
+shl r02,r02
+out r02
+halt
+
+sdelay:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h19
+andi r01,r01,h00
+atef1:be r00,r01,atef2
+subi r00,r00,h01
+jump atef1
+atef2:pop r01
+pop r00
+ret
+
+delay_100us:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h64
+andi r01,r01,h00
+atef3:be r00,r01,atef4
+call sdelay
+subi r00,r00,h01
+jump atef3
+atef4:pop r01
+pop r00
+ret
+
+delay_2ms: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h14
+andi r01,r01,h00
+h4: be r01,r00,h3
+call delay_100us
+subi r00,r00,h01
+jump h4
+h3:pop r01
+pop r00
+ret
+
+wait_15ms: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h04
+andi r01,r01,h00
+ashour: be r01,r00,ashour2
+call delay_2ms
+subi r00,r00,h01
+jump ashour
+ashour2: pop r01
+pop r00
+ret

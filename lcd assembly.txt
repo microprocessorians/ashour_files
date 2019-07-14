@@ -1,0 +1,152 @@
+andi r00,r00,h00
+out r00
+;call delay_2ms
+call delay_0.5s
+addi r00,r00,h38
+call cmndwrt
+;call delay_2ms
+call delay_0.5s
+andi r00,r00,h00
+addi r00,r00,h0e
+call cmndwrt
+andi r00,r00,h00
+addi r00,r00,h01
+call cmndwrt
+;call delay_2ms
+call delay_0.5s
+andi r00,r00,h00
+addi r00,r00,h06
+call cmndwrt
+andi r00,r00,h00
+addi r00,r00,h46;f
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h55;u
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h43;c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4b;k
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h20;space
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h57;w
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4f;o
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52;r
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4c;l
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h44;d
+call datawrt
+andi r00,r00,h00
+addi r00,r00,hc0;
+call cmndwrt
+;call delay_2ms
+call delay_0.5s
+andi r00,r00,h00
+addi r00,r00,h42;b
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h59;y
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3a;:
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h54;t
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h45;e
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41;a
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4d;m
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h31;1
+call datawrt
+halt
+
+cmndwrt: out r00
+ori r00,r00,h100
+out r00
+;call sdelay
+call delay_0.5s
+andi r00,r00,hff
+out r00
+;call delay_100us
+call delay_0.5s
+ret
+
+datawrt:out r00
+ori r00,r00,h500
+out r00
+;call sdelay
+call delay_0.5s
+andi r00,r00,heff
+out r00
+;call delay_100us
+call delay_0.5s
+ret
+
+sdelay:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h19
+andi r01,r01,h00
+atef1:be r00,r01,atef2
+subi r00,r00,h01
+jump atef1
+atef2:pop r01
+pop r00
+ret
+
+delay_100us:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h64
+andi r01,r01,h00
+atef3:be r00,r01,atef4
+call sdelay
+subi r00,r00,h01
+jump atef3
+atef4:pop r01
+pop r00
+ret
+
+delay_2ms: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h14
+andi r01,r01,h00
+h4: be r01,r00,h3
+call delay_100us
+subi r00,r00,h01
+jump h4
+h3:pop r01
+pop r00
+ret
+
+delay_0.5s:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,hfa
+andi r01,r01,h00
+hb: be r01,r00,ha
+call delay_2ms
+subi r00,r00,h01
+jump hb
+ha:pop r01
+pop r00
+ret

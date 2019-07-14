@@ -1,0 +1,309 @@
+;r15 must have wromg counter
+print_deadman:push r00
+load r00,r15,hc8 ;starts from 200 in memory
+push r00
+andi r00,r00,hff
+call cmndwrt
+call delay_2ms
+pop r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+andi r00,r00,hff
+call datawrt
+pop r00
+ret
+
+delete_man:push r15;to hold i counter
+push r14;to hold six
+andi r14,r14,h00
+addi r14,r14,h06
+andi r15,15,h00 
+tolan2:bg r15,r14,tolan
+load r00,r15,hc8
+andi r00,ffh
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+addi r15,r15,h01
+jump tolan2
+tolan:pop r14
+pop r15
+ret
+
+
+delete_word:push r00
+andi r00,r00,h00
+addi r00,r00,hd4
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+pop r00
+ret
+
+;r00 holds ascii
+;r01 holds place in word
+write_char: push r00
+push r01
+addi r01,r01,hd4
+push r00
+addi r00,r01,h00
+call cmndwrt
+call delay_ms
+pop r00
+call datawrt
+pop r01
+pop r00
+ret
+
+winner_screen:push r00
+call delete_word
+call delete_man
+andi r00,r00,h00
+addi r00,r00,h96
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h57;'w'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h49;'i'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4e;'N'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4e;'N'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h45;'e'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52;'r'
+call datawrt
+pop r00
+ret
+
+loser_screen:push r00
+call delete_word
+call delete_man
+andi r00,r00,h00
+addi r00,r00,h96
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h4c;'l'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4f;'o'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h53;'s'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h45;'e'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52;'r'
+call datawrt
+pop r00
+ret
+
+;selection stored in r00
+; and a pop r00 missing
+mode_screen:push r00
+andi r00,r00,h00
+addi r00,r00,hc0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h41 ;A
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3A ;':'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h45 ;E
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41 ;A
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h53 ;S
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h59 ;Y
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h94
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h42 ;B
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3A ;':'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4E ;N
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4F ;O
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52 ;R
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4D ;M
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41 ;A
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4c ;L
+call datawrt
+andi r00,r00,h00
+addi r00,r00,hD4
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h43 ;C
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3A ;':'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h48 ;H
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41 ;A
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52 ;R
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h44 ;D
+call datawrt
+ret
+
+delete_mode:push r00
+andi r00,r00,h00
+addi r00,r00,hc0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h94
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,hd4
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+pop r00
+ret
+
+
+;ascii stord in r00
+hint_lcd:push r00
+push r00
+andi r00,r00,h00
+addi r00,r00,hc0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h48;'h'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h49;'i'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4e;'n'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h54;'t'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3a;':'
+call datawrt
+pop r00
+call datawrt
+call delay_3s
+andi r00,r00,h00
+addi r00,r00,hc0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+pop r00
+ret
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

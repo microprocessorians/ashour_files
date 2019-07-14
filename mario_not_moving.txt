@@ -1,0 +1,918 @@
+call lcd_init
+andi r01,r01,h00;r01 = a
+andi r00,r00,h00
+andi r05,r05,h00
+addi r05,r05,h14
+hady2:bge r01,r05,hady
+addi r02,r01,h1;r02 = b
+addi r03,r01,h2;r03 = c
+addi r04,r01,h3; r04 = d
+call mario_1
+
+addi r00,r01,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+addi r00,r01,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h01
+call datawrt
+
+addi r00,r02,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h02
+call datawrt
+addi r00,r02,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+
+addi r00,r03,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h04
+call datawrt
+addi r00,r03,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h05
+call datawrt
+
+;call delay_s
+
+call mario_2
+addi r00,r01,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+addi r00,r01,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h01
+call datawrt
+
+addi r00,r02,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h02
+call datawrt
+addi r00,r02,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+
+addi r00,r03,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h04
+call datawrt
+addi r00,r03,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h05
+call datawrt
+
+;call delay_s
+
+call mario_3
+addi r00,r01,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+addi r00,r01,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h01
+call datawrt
+
+addi r00,r02,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h02
+call datawrt
+addi r00,r02,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+
+addi r00,r03,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h04
+call datawrt
+addi r00,r03,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h05
+call datawrt
+
+;call delay_s
+
+call mario_4
+addi r00,r01,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h04
+call datawrt
+addi r00,r01,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h04
+call datawrt
+
+addi r00,r02,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+addi r00,r02,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h01
+call datawrt
+
+addi r00,r03,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h02
+call datawrt
+addi r00,r03,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+
+;call delay_s
+
+call mario_5
+addi r00,r01,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h6
+call datawrt
+addi r00,r01,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h06
+call datawrt
+
+addi r00,r02,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+addi r00,r02,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h01
+call datawrt
+
+addi r00,r03,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h02
+call datawrt
+addi r00,r03,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+
+addi r00,r04,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h04
+call datawrt
+addi r00,r04,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h05
+call datawrt
+
+;call delay_s
+
+call mario_6
+addi r00,r02,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+addi r00,r02,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h01
+call datawrt
+
+addi r00,r03,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h02
+call datawrt
+addi r00,r03,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+
+addi r00,r04,h80
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h04
+call datawrt
+addi r00,r04,hc0
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h05
+call datawrt
+;call delay_s
+addi r01,r01,h1
+jump hady2
+hady:halt
+
+
+mario_1: push r00
+andi r00,r00,h00
+addi r00,r00,h40
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+addi r00,r00,h01
+call datawrt
+call datawrt
+call datawrt;;3
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h01
+call datawrt
+call datawrt
+call datawrt
+call datawrt;;
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+addi r00,r00,h1f
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+andi r00,r00,h00
+call datawrt
+call datawrt
+addi r00,r00,h18
+call datawrt
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h18
+call datawrt
+ori r00,r00,h04
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h18
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h10
+call datawrt
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h10
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+call datawrt
+call datawrt
+addi r00,r00,h10
+call datawrt
+andi r00,r00,h00
+call datawrt
+pop r00
+ret
+lcd_init:push r00
+andi r00,r00,h00
+out r00
+;call delay_2ms
+addi r00,r00,h38
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+;addi r00,r00,h0e
+addi r00,r00,h0c
+call cmndwrt
+andi r00,r00,h00
+addi r00,r00,h01
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h06
+call cmndwrt
+pop r00
+ret
+
+cmndwrt: push r00
+out r00
+ori r00,r00,h100
+out r00
+;call sdelay
+andi r00,r00,hff
+out r00
+;call delay_100us
+pop r00
+ret
+
+datawrt:push r00
+out r00
+ori r00,r00,h300
+out r00
+;call sdelay
+andi r00,r00,heff
+out r00
+;call delay_100us
+pop r00
+ret
+
+sdelay:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h19
+andi r01,r01,h00
+atef1:be r00,r01,atef2
+subi r00,r00,h01
+jump atef1
+atef2:pop r01
+pop r00
+ret
+
+delay_100us:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h64
+andi r01,r01,h00
+atef3:be r00,r01,atef4
+;call sdelay
+subi r00,r00,h01
+jump atef3
+atef4:pop r01
+pop r00
+ret
+
+delay_2ms: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h14
+andi r01,r01,h00
+h4: be r01,r00,h3
+;call delay_100us
+subi r00,r00,h01
+jump h4
+h3:pop r01
+pop r00
+ret
+
+delay_s: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h1f4
+andi r01,r01,h00
+amar:be r01,r00,amar2
+;call delay_2ms
+subi r00,r00,h01
+jump amar
+amar2:pop r01
+pop r00
+ret
+
+mario_2:push r00
+andi r00,r00,h00
+addi r00,r00,h40
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+
+addi r00,r00,h07
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h01
+call datawrt
+ori r00,r00,h02
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h01
+call datawrt
+
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h0f
+call datawrt
+ori r00,r00,h10
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h0f
+call datawrt
+
+ori r00,r00,h10
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h19
+call datawrt
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h10
+call datawrt
+
+andi r00,r00,h00
+call datawrt
+call datawrt
+addi r00,r00,h1c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h10
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1c
+call datawrt
+andi r00,r00,h1e
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h18
+call datawrt
+
+andi r00,r00,h00
+addi r00,r00,h1f
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h16
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+call datawrt
+call datawrt 
+pop r00
+ret
+  
+
+mario_3:push r00
+andi r00,r00,h00
+addi r00,r00,h40
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+addi r00,r00,h03
+call datawrt
+call datawrt
+ori r00,r00,h04
+call datawrt
+andi r00,r00,h00
+call datawrt
+
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h07
+call datawrt
+ori r00,r00,h08
+call datawrt
+call datawrt
+ori r00,r00,h10
+call datawrt
+call datawrt
+call datawrt
+
+andi r00,r00,h00
+addi r00,r00,h0f
+call datawrt
+ori r00,r00,h10
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h07
+call datawrt
+call datawrt
+
+andi r00,r00,h00
+call datawrt
+call datawrt
+ori r00,r00,h10
+call datawrt
+ori r00,r00,h0e
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h18
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+ori r00,r00,h01
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+
+andi r00,r00,h00
+addi r00,r00,h1c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h18
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h10
+call datawrt
+andi r00,r00,h00
+call datawrt
+ori r00,r00,h10
+call datawrt
+pop r00
+ret
+
+mario_4: push r00
+andi r00,r00,h00
+addi r00,r00,h40
+call cmndwrt
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h03
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h07
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,hf
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+
+andi r00,r00,h00
+addi r00,r00,hf
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h07
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h18
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1f
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1f
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+
+andi r00,r00,h00
+addi r00,r00,h1c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1c
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h10
+call datawrt
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+pop r00
+ret  
+mario_5:push r00
+andi r00 , r00 , h00 
+addi r00 , r00 , h40
+call cmndwrt
+;call delay_2ms
+andi r00 ,r00 ,h00
+call datawrt
+addi r00 , r00 , h01
+call datawrt
+ori r00 , r00, h02
+call datawrt 
+call datawrt 
+ori r00 , r00 , h04
+call datawrt 
+call datawrt 
+call datawrt 
+andi r00 , r00 , h00 
+addi r00 , r00  ,h01
+call datawrt
+ 
+andi r00 , r00 , h00 
+addi r00 , r00 , h1f
+call datawrt
+call datawrt
+andi r00 , r00 , h00 
+addi r00 , r00 , h1b
+call datawrt
+andi r00 , r00 , h00 
+addi r00 , r00 , h07
+call datawrt 
+andi r00,r00,h00
+addi r00,r00,hf
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1f
+call datawrt
+andi r00 , r00 , h00 
+addi r00 , r00 , h1c
+call datawrt
+andi r00 , r00 , h00 
+addi r00 , r00 , h0e
+call datawrt
+
+andi r00 , r00 , h00 
+call datawrt
+addi r00, r00 , h1c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1f
+call datawrt
+andi r00 , r00 , h00 
+addi r00 , r00 , h1e
+call datawrt
+ori r00 , r00 , h01
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+
+call datawrt
+call datawrt
+andi r00 , r00 , h00 
+addi r00 , r00 , h1e
+call datawrt
+ori r00 , r00 , h01 
+call datawrt
+call datawrt
+andi r00 , r00 , h00 
+addi r00 , r00 , h0f
+call datawrt
+andi r00 , r00 , h00
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+ori r00 , r00 , h10
+call datawrt
+andi r00 , r00 , h00
+call datawrt
+call datawrt
+ori r00 , r00 , h10
+call datawrt
+andi r00 , r00 , h00 
+call datawrt
+call datawrt
+addi r00 , r00 , h18
+call datawrt
+call datawrt
+andi r00 , r00 , h00
+addi r00 , r00 , h10 
+call datawrt  
+call datawrt  
+call datawrt  
+call datawrt 
+andi r00 , r00 , h00 
+call datawrt  
+call datawrt
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt 
+pop r00 
+ret
+mario_6:andi r00,r00,h00
+addi r00,r00,h40
+call cmndwrt
+;call delay_2ms
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h03
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h7
+call datawrt
+andi r00,r00,h00
+addi r00,r00,hf
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1f
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h18
+call datawrt
+andi r00,r00,h00
+call datawrt
+
+call datawrt
+call datawrt
+addi r00,r00,h1e
+call datawrt
+ori r00,r00,h01
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1c
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1e
+call datawrt
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+addi r00,r00,h10
+call datawrt
+andi r00,r00,h00
+call datawrt
+addi r00,r00,h10
+call datawrt
+ori r00,r00,h08
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h10
+call datawrt
+andi r00,r00,h00
+call datawrt
+ori r00,r00,h10
+call datawrt
+andi r00,r00,h00
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+pop r00
+ret

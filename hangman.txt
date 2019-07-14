@@ -1,0 +1,110 @@
+andi r00,r00,h00
+addi r00,r00,h9c0;'n'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h8e0;'g'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h9a0;'m'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h820;'a'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h9c0;'n'
+call datawrt
+	;end
+
+andi r00,r00,h00
+addi r00,r00,h11e0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,hbe0
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h19e0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,hf80
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h13e0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,hf80
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h1be0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,hf80
+call datawrt
+
+halt
+
+cmndwrt: out r00
+;ori r00,r00,h100
+ori r00,r00,h2000
+out r00
+call sdelay
+;andi r00,r00,hff
+andi r00,r00,h1fe0
+out r00
+call delay_100us
+ret
+
+datawrt:out r00
+;ori r00,r00,h500
+ori r00,r00,h6000
+out r00
+call sdelay
+;andi r00,r00,heff
+andi r00,r00,h5fe0
+out r00
+call delay_100us
+ret
+
+sdelay:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h19
+andi r01,r01,h00
+atef1:be r00,r01,atef2
+subi r00,r00,h01
+jump atef1
+atef2:pop r01
+pop r00
+ret
+
+delay_100us:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h64
+andi r01,r01,h00
+atef3:be r00,r01,atef4
+call sdelay
+subi r00,r00,h01
+jump atef3
+atef4:pop r01
+pop r00
+ret
+
+delay_2ms: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h14
+andi r01,r01,h00
+h4: be r01,r00,h3
+call delay_100us
+subi r00,r00,h01
+jump h4
+h3:pop r01
+pop r00
+ret

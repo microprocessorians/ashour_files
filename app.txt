@@ -1,0 +1,733 @@
+call lcd_init
+	addi r14,r14,h00
+	L0: ANDI r03,r03,h00
+	ANDI r04,r04,h00
+	andi r00,r00,h00
+	addi r00, r00, h0A
+	L4: call mode_screen  
+	call delete_mode
+	call keypad_i
+	andi r15,r15,h00
+	addi r15,r15,h41
+	be r06,r15,L1
+	addi r15,r15,h01
+	be r06,r15,L2
+	addi r15,r15,h01
+	be r06,r15,L3
+	jump L4
+	L1:andi r15,r15,h00
+	addi r01,r15,h01
+	jump L5
+	L2:andi r15,r15,h00
+	addi r01,r15,h02
+ 	jump L5
+	L3:andi r15,r15,h00 ;26
+	addi r01,r15,h03
+	jump L5
+	L5:ANDI r02,r02,h00 ;29
+	load r07,r00,h02
+	andi r15,r15,h00
+	addi r15,r15,h01 ;34
+	bne r01,r15,L6
+	addi r15,r15,h06
+	be r03, r15,L_loser
+	be r04,r07,L_winner
+	jump L7
+	L6:andi r15,r15,h00
+	ori r15,r15,h02
+	bne r01,r15,L8
+	addi r15,r15,h05
+	be r03,r15,L_loser
+	be r04,r07,L_winner
+	jump L7
+	L8:andi r15,r15,h00
+	ori r15,r15,h03
+	be r03,r15,L_loser
+	be r04,r07,L_winner
+	L7:andi r08,r08,h00 ;51
+	ori r08,r08,h01
+	call keypad_i ; R6= key pressed
+	andi r15,r15,h00
+	addi r15,r15,h5B
+	bne r06,r15,L9 ;54
+	andi r15,r15,h00 
+	ori r15,r15,h01
+	bne r01,r15,L7
+	addi r15,r15,h01
+	be r02,r15,L7
+	call helper
+	addi r02,r02,h01
+	jump L7
+	L9:andi r12,r12,h00 ;64
+	L11:andi r15,r15,h00
+	ori r15,r15,h03 ;66
+	be r08,r15,L10 ;6
+	andi r09,r09,h00
+	add r15,r08,r00
+	subi r15,r15,h01
+	load r10,r15,h00
+	subi r15,r08,h03
+	load r05, r15,h0A
+	L17:andi r15,r15,h00
+	ori r15,r15,h04
+	bne r09,r15,L12
+	addi r08,r08,h01
+	jump L11
+	L12:push r10
+	andi r10,r10,hff
+	bne r06,r10,L13
+	andi r11,r11,h00
+	ori r11,r11,h01
+	andi r15,r15,h00
+	L15:be r15,r09,L14
+	shl r11, r11
+	addi r15,r15,h01
+	jump L15
+	L14: push r05 
+	and r05, r11, r05
+	be r11,r05,L16
+	pop r05
+	or r05, r05,r11
+	subi r15,r08,h03
+	store r05,r15,h0A
+	addi r04,r04,h01
+	push r00
+	push r01
+	push r08
+	andi r15, r15, h00
+	ori r15, r15, h01
+	be r08, r15, h_1_1
+	addi r01, r08, h04
+	jump l_test
+	h_1_1: addi r01, r08, h00
+	
+	l_test: addi r00, r06, h00
+	call write_char
+	pop r08
+	pop r01
+	pop r00
+	L16: ori r12,r12,h01
+	L13: pop r10
+	shr r10, r10
+	shr r10, r10
+	shr r10, r10
+	shr r10, r10		
+	shr r10, r10
+	shr r10, r10
+	shr r10, r10
+	shr r10, r10
+	addi r09,r09,h01
+	jump L17
+	L10: andi r15,r15,h00 ;108
+	xori r15,r15,h01
+	be r12,r15,L5
+	addi r03,r03,h01
+	push r15
+	addi r15, r03, h00
+	call print_deadman
+	pop r15
+	jump L5
+
+	
+	L_loser: call loser_screen 
+	addi r14,r14,h01
+	andi r15, r15, h00
+	addi r15, r15, h0A
+	subi r15, r15, h01
+	push r00
+	andi r00, r00, h00
+	store r00, r15, h00
+	subi r15, r15,h01
+	store r00, r15, h00
+	pop r00
+	jump L0
+
+
+	L_winner: call winner_screen
+	addi r14,r14,h01
+	andi r15, r15, h00
+	addi r15, r15, h0A
+	subi r15, r15, h01
+	push r00
+	andi r00, r00, h00
+	store r00, r15, h00
+	subi r15, r15,h01
+	store r00, r15, h00
+	pop r00
+	jump L0
+;;;;
+	halt
+
+lcd_init:push r00
+andi r00,r00,h00
+out r00
+call delay_2ms
+addi r00,r00,h38
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h0e
+call cmndwrt
+andi r00,r00,h00
+addi r00,r00,h01
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h06
+call cmndwrt
+andi r00,r00,h00
+addi r00,r00,h48;'h'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41;'a'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4e;'n'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h47;'g'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4d;'m'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41;'a'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4e;'n'
+call datawrt
+
+andi r00,r00,h00
+addi r00,r00,h8f
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h5f;'_'
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,hcf
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h7c;'|'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,ha3
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h7c;'|'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,he2
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h5f;'_'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h7c;'|'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h5f;'_'
+call datawrt
+pop r00
+ret
+
+
+helper: push R06
+push R03
+push R02
+push R01
+push R05
+andi R03, R03, h00
+andi R01, R01, h00
+ori R01, R01,h01
+h_2: AND R02, R05, R01
+andi R15, R15, h00
+be R02, R15, h_1
+shr R05, R05
+addi R03, R03, h01
+jump h_2
+andi R15, R15, h00
+addi R15, R15, h04
+h_1: bg R03, R15, h_3
+load R06, R00, h00
+jump h_4
+h_3: load R06, R00, h01
+subi R03, R03, h04
+h_4: andi R02, R02, h00
+ori R02, R02, hFF
+mulli R10, R03, h08
+andi R15, R15, h00
+loop_1: shr R06, R06
+subi R10, R10, h01
+bne R15, R10, loop_1
+AND R06, R02, R06
+;call LCD_helper
+pop R05
+pop R01
+pop R02
+pop R03
+pop R06
+
+
+cmndwrt: push r00
+out r00
+ori r00,r00,h100
+out r00
+call sdelay
+andi r00,r00,hff
+out r00
+call delay_100us
+pop r00
+ret
+
+datawrt:push r00
+out r00
+ori r00,r00,h300
+out r00
+call sdelay
+andi r00,r00,heff
+out r00
+call delay_100us
+pop r00
+ret
+
+sdelay:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h19
+andi r01,r01,h00
+atef1:be r00,r01,atef2
+subi r00,r00,h01
+jump atef1
+atef2:pop r01
+pop r00
+ret
+
+delay_100us:push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h64
+andi r01,r01,h00
+atef3:be r00,r01,atef4
+call sdelay
+subi r00,r00,h01
+jump atef3
+atef4:pop r01
+pop r00
+ret
+
+delay_2ms: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h14
+andi r01,r01,h00
+h4: be r01,r00,h3
+call delay_100us
+subi r00,r00,h01
+jump h4
+h3:pop r01
+pop r00
+ret
+
+wait_15ms: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h08
+andi r01,r01,h00
+ashour:be r01,r00,ashour2
+call delay_2ms
+subi r00,r00,h01
+jump ashour
+ashour2:pop r01
+pop r00
+ret
+
+mode_screen:push r00
+andi r00,r00,h00
+addi r00,r00,hc0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h41 ;A
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3A ;':'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h45 ;E
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41 ;A
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h53 ;S
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h59 ;Y
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h94
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h42 ;B
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3A ;':'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4E ;N
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4F ;O
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52 ;R
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4D ;M
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41 ;A
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4c ;L
+call datawrt
+andi r00,r00,h00
+addi r00,r00,hD4
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h43 ;C
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h3A ;':'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h48 ;H
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h41 ;A
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52 ;R
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h44 ;D
+call datawrt
+pop r00
+ret
+
+
+
+delete_mode:push r00
+andi r00,r00,h00
+addi r00,r00,hc0
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h94
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+andi r00,r00,h00
+addi r00,r00,hd4
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+pop r00
+ret
+
+keypad_i: push r02
+push r00
+push r01
+push r03
+push r04
+push r05 
+andi r00,r00,h00
+out r00
+wait_for_release:nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+andi r01,r01,h00
+addi r01,r01,h3f
+bne r00,r01,wait_for_release
+wait_for_key:nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+be r00,r01,wait_for_key
+call wait_15ms
+in r00
+andi r00,r00,h3f
+be r00,r01,wait_for_key	
+andi r00,r00,h00
+;addi r00,r00,hf;  0,1111
+addi r00,r00,h3c00
+out r00
+nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+bne r00,r01,row_0
+andi r00,r00,h00
+;addi r00,r00,h17; 1,0111
+addi r00,r00,h5c00
+out r00
+nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+bne r00,r01,row_1
+andi r00,r00,h00
+;addi r00,r00,h1b;  1,1011
+addi r00,r00,h6c00
+out r00
+nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+bne r00,r01,row_2
+andi r00,r00,h00
+;addi r00,r00,h1d;  1,1101
+addi r00,r00,h7400
+out r00
+nop
+nop
+nop
+in r00
+andi r00,r00,h3f
+bne r00,r01,row_3
+andi r00,r00,h00
+;addi r00,r00,h1e;  1,1110
+addi r00,r00,h7800
+out r00
+nop
+nop
+nop
+in r00 
+andi r00,r00,h3f
+bne r00,r01,row_4
+
+row_0:andi r02,r02,h00
+jump cols
+
+row_1: andi r02,r02,h00
+addi r02,r02,h06
+jump cols
+
+row_2: andi r02,r02,h00
+addi r02,r02,h0c
+jump cols
+
+row_3: andi r02,r02,h00
+addi r02,r02,h12
+jump cols
+
+row_4: andi r02,r02,h00
+addi r02,r02,h18
+
+cols:andi r03,r03,h00
+andi r04,r04,h00
+andi r05,r05,h00
+addi r03,r03,h01
+up: push r00
+and r00,r00,r03
+be r00,r05,outt
+pop r00
+addi r04,r04,h01
+shl r03,r03
+jump up
+outt: pop r00
+add r02,r02,r04
+addi r02,r02,h41
+pop r05
+pop r04
+pop r03
+pop r01
+pop r00
+addi r06, r02, h00
+pop r02
+ret
+
+
+winner_screen:push r00
+call delete_word
+call delete_man
+andi r00,r00,h00
+addi r00,r00,h96
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h57;'w'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h49;'i'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4e;'N'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4e;'N'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h45;'e'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52;'r'
+call datawrt
+pop r00
+ret
+
+
+loser_screen:push r00
+call delete_word
+call delete_man
+andi r00,r00,h00
+addi r00,r00,h96
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h4c;'l'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h4f;'o'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h53;'s'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h45;'e'
+call datawrt
+andi r00,r00,h00
+addi r00,r00,h52;'r'
+call datawrt
+pop r00
+ret
+
+
+delete_man:push r15;to hold i counter
+push r14;to hold six
+andi r14,r14,h00
+addi r14,r14,h06
+andi r15,r15,h00 
+tolan2:bg r15,r14,tolan
+load r00,r15,hc8
+andi r00, r00,hff
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+addi r15,r15,h01
+jump tolan2
+tolan:pop r14
+pop r15
+ret
+
+
+delete_word:push r00
+andi r00,r00,h00
+addi r00,r00,hd4
+call cmndwrt
+call delay_2ms
+andi r00,r00,h00
+addi r00,r00,h20
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+call datawrt
+pop r00
+ret
+
+print_deadman:push r00
+load r00,r15,hc8 ;starts from 200 in memory
+push r00
+andi r00,r00,hff
+call cmndwrt
+call delay_2ms
+pop r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+andi r00,r00,hff
+call datawrt
+pop r00
+reprint_deadman:push r00
+load r00,r15,hc8 ;starts from 200 in memory
+push r00
+andi r00,r00,hff
+call cmndwrt
+call delay_2ms
+pop r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+shr r00,r00
+andi r00,r00,hff
+call datawrt
+pop r00
+ret
+
+write_char: push r00
+push r01
+addi r01,r01,hd4
+push r00
+addi r00,r01,h00
+call cmndwrt
+call delay_2ms
+pop r00
+call datawrt
+pop r01
+pop r00
+ret

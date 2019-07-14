@@ -1,0 +1,133 @@
+PUSH R00
+PUSH R01 
+PUSH R04
+PUSH R07
+PUSH R08
+PUSH R09
+PUSH R03
+xor r03,r03,r03
+xor r09,r09,r09
+xor r04,r04,r04
+addi r04,r04,h3F
+GND_ALL_rows:XOR r00,r00,r00
+    OUT R00
+WAIT_RELEASE:NOP
+    IN R01
+    ANDI R01,R01,h3F
+    BNE R01,R04,WAIT_RELEASE
+WAIT_FOR_KEY:NOP
+    IN R01
+    ANDI R01,R01,h3F
+    BE R01,R04,WAIT_FOR_KEY
+    CALL WAIT_15_MS
+    IN R01
+    ANDI R01,R01,h3F
+    BE R01,R04,WAIT_FOR_KEY
+SCAN_COL:XOR R00,R00,R00
+    ADDI R00,R00,h1F
+    OUT R00
+    NOP
+    IN R01
+    ANDI R01,R01,h3F
+    BNE R01,R04,ROW_FUNC
+SCAN_COL:XOR R00,R00,R00
+    ADDI R00,R00,h2F
+    OUT R00
+    NOP
+    IN R01
+    ANDI R01,R01,h2F
+    BNE R01,R04,ROW_FUNC
+SCAN_COL:XOR R00,R00,R00
+    ADDI R00,R00,h37
+    OUT R00
+    NOP
+    IN R01
+    ANDI R01,R01,h3F
+    BNE R01,R04,ROW_FUNC
+SCAN_COL:XOR R00,R00,R00
+    ADDI R00,R00,h3B
+    OUT R00
+    NOP
+    IN R01
+    ANDI R01,R01,h3F
+    BNE R01,R04,ROW_FUNC
+SCAN_COL:XOR R00,R00,R00
+    ADDI R00,R00,h3D
+    OUT R00
+    NOP
+    IN R01
+    ANDI R01,R01,h3F
+    BNE R01,R04,ROW_FUNC
+SCAN_COL:XOR R00,R00,R00
+    ADDI R00,R00,h3E
+    OUT R00
+    NOP
+    IN R01
+    ANDI R01,R01,h3F
+    BNE R01,R04,ROW_FUNC
+
+ROW_FUNC: XORI R07,R00,h3F
+    XORI R08,R01,h3F
+    JuMP COUNT_ROWS
+
+ADD_ROW: ADDI R09,R09,h1
+
+COUNT_ROWS: SHR R07,R07
+    BNE R07,R03,ADD_ROW
+    JuMP COUNT_COLS
+
+ADD_COL: ADDI R09,R09,h5
+
+COUNT_COLS: SHR R07,R07
+    BNE R07,R03,ADD_COL
+
+    ADDI r09,r09,h64
+    LoaD r06,r09,h00
+
+SHL R06,R06
+SHL R06,R06
+SHL R06,R06
+SHL R06,R06
+SHL R06,R06
+OUT R06
+    	
+
+POP R03
+pop R09
+pop R08
+pop R07
+pop R04
+pop R01
+pop R00
+halt
+
+delay_100us:push r00
+push r01
+push r02
+andi r00,r00,h00
+addi r00,r00,h64
+andi r02,r02,h00
+h1:be r00,r02,loop1
+andi r01,r01,h00
+addi r01,r01,h19
+h2: be r01,r02,loop2
+subi r01,r01,h01
+jump h2
+loop2:subi r00,r00,h01
+jump h1
+loop1: pop r02
+pop r01
+pop r00
+ret
+WAIT_15_MS: push r00
+push r01
+andi r00,r00,h00
+addi r00,r00,h14
+andi r01,r01,h00
+h4: be r01,r00,h3
+call delay_100us
+subi r00,r00,h01
+jump h4
+h3:pop r01
+pop r00
+ret
